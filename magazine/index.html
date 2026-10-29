@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>مجلة سراج عُمان الإلكترونية</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#eaf5f4;color:#173b45;text-align:center}
+header{background:linear-gradient(120deg,#087868,#07558b);color:white;padding:30px 12px}
+header h1{font-size:34px;margin:8px}
+header h2{color:#ffe3a0}
+nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:16px}
+button{border:0;border-radius:10px;background:#086a98;color:white;padding:12px 17px;font-size:15px;cursor:pointer}
+button:hover{background:#064b71}
+.page{display:none;max-width:850px;margin:15px auto;padding:28px;background:white;border:3px solid #e2c17b;border-radius:20px;min-height:340px;box-shadow:0 6px 20px #0002}
+.page.active{display:block}
+.page h2{color:#a23c30;font-size:27px}
+.page p{font-size:20px;line-height:2;text-align:right}
+.emoji{font-size:70px;margin:25px}
+.controls{display:flex;justify-content:center;align-items:center;gap:12px;margin:20px;flex-wrap:wrap}
+label{display:block;text-align:right;margin:12px;font-size:18px}
+footer{background:#07558b;color:white;padding:18px}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🇴🇲 مجلة سراج عُمان</h1>
+<h2>رحلتي في تراث ولاية الرستاق</h2>
+<p>أكتشف تراثي... وأعتز بهويتي</p>
+</header>
+
+<nav id="menu"></nav>
+
+<main>
+<section class="page active">
+<h2>مرحبًا بكم في مجلة سراج عُمان</h2>
+<div class="emoji">🇴🇲🏰🌴</div>
+<p>أهلًا بكم في رحلة ممتعة لاكتشاف المعالم التراثية في ولاية الرستاق والتعرف على تاريخها العريق وعاداتها وتقاليدها الأصيلة.</p>
+</section>
+
+<section class="page">
+<h2>🏰 حصن الحزم</h2>
+<div class="emoji">🏰</div>
+<p>يعد حصن الحزم من المعالم التاريخية المهمة في ولاية الرستاق. ويتميز بأبوابه القوية وأبراجه العالية، وهو شاهد على عراقة العمارة العُمانية.</p>
+</section>
+
+<section class="page">
+<h2>🌴 فلج الميسر</h2>
+<div class="emoji">🌴💧</div>
+<p>فلج الميسر من الأفلاج العُمانية القديمة في ولاية الرستاق، وقد ساهم في توفير المياه لري المزارع وخدمة السكان.</p>
+</section>
+
+<section class="page">
+<h2>🏯 قلعة الرستاق</h2>
+<div class="emoji">🏯</div>
+<p>تعد قلعة الرستاق من أبرز المعالم التاريخية في سلطنة عُمان، وتتميز بأبراجها وجدرانها وتصميمها المعماري العريق.</p>
+</section>
+
+<section class="page">
+<h2>🛍️ سوق بو ثمانية</h2>
+<div class="emoji">🏺🛍️</div>
+<p>نتعرف في هذا القسم على سوق بو ثمانية، وأهمية الأسواق التقليدية في المحافظة على الحرف والمنتجات والتراث العُماني.</p>
+</section>
+
+<section class="page">
+<h2>👗 الأزياء العُمانية</h2>
+<div class="emoji">👗🧵</div>
+<p>تتميز الأزياء العُمانية التقليدية بألوانها وتطريزاتها الجميلة، وتعكس أصالة الهوية الوطنية وتنوع الموروث الثقافي.</p>
+</section>
+
+<section class="page">
+<h2>🧠 اختبر معلوماتك</h2>
+<p>أين يقع حصن الحزم؟</p>
+<label><input type="radio" name="q1" value="0"> مسقط</label>
+<label><input type="radio" name="q1" value="1"> الرستاق</label>
+<label><input type="radio" name="q1" value="0"> نزوى</label>
+<p>ما فائدة فلج الميسر؟</p>
+<label><input type="radio" name="q2" value="1"> ري المزارع</label>
+<label><input type="radio" name="q2" value="0"> صناعة الملابس</label>
+<button onclick="check()">تحقق من إجاباتي</button>
+<p id="result" aria-live="polite"></p>
+</section>
+
+<section class="page">
+<h2>✏️ أنشطة تعليمية</h2>
+<div class="emoji">🎨📚</div>
+<p>ارسم أحد المعالم التراثية التي تعرفت عليها، ثم اكتب ثلاث جمل تصف جماله وأهميته في تاريخ عُمان.</p>
+<p>شارك أسرتك ما تعلمته عن تراث ولاية الرستاق.</p>
+</section>
+</main>
+
+<div class="controls">
+<button onclick="move(-1)">❯ السابقة</button>
+<strong id="counter"></strong>
+<button onclick="move(1)">التالية ❮</button>
+</div>
+
+<footer>
+مجلة سراج عُمان الإلكترونية
+</footer>
+
+<script>
+const pages=[...document.querySelectorAll(".page")];
+const names=[
+"🏠 الغلاف",
+"🏰 حصن الحزم",
+"🌴 فلج الميسر",
+"🏯 قلعة الرستاق",
+"🛍️ سوق بو ثمانية",
+"👗 الأزياء العُمانية",
+"🧠 اختبر معلوماتك",
+"✏️ أنشطة تعليمية"
+];
+let current=0;
+const menu=document.getElementById("menu");
+names.forEach((name,i)=>{
+ const b=document.createElement("button");
+ b.textContent=name;
+ b.onclick=()=>show(i);
+ menu.appendChild(b);
+});
+function show(i){
+ current=Math.max(0,Math.min(pages.length-1,i));
+ pages.forEach((p,n)=>p.classList.toggle("active",n===current));
+ document.getElementById("counter").textContent=
+ (current+1)+" / "+pages.length;
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function move(n){show(current+n)}
+function check(){
+ let score=0;
+ ["q1","q2"].forEach(q=>{
+  const a=document.querySelector('input[name="'+q+'"]:checked');
+  if(a&&a.value==="1")score++;
+ });
+ document.getElementById("result").textContent=
+ "نتيجتك: "+score+" من 2";
+}
+show(0);
+</script>
+</body>
+</html>
